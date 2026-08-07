@@ -1,0 +1,23 @@
+node_modules
+npm-debug.log
+*.log
+uploads/*
+!uploads/.gitkeep
+.env
+*.md
+.git
+.gitignore
+.gitkeep
+Dockerfile
+docker-compose.yml
+.github
+nginx
+scripts
+# Regenerated in the build stage by `npx prisma generate`
+generated
+# Local dev helpers / runtime artifacts not needed in the image
+check_users.js
+test-db.js
+user_status.json
+*.err
+*.out

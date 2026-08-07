@@ -1,0 +1,342 @@
+[auth/send-verification] PrismaClientValidationError: 
+Invalid `prisma.user.update()` invocation in
+D:\Development\project popin\backend\src\routes\auth.js:269:23
+
+  266 }
+  267 
+  268 const code = generateVerificationCode();
+→ 269 await prisma.user.update({
+        where: {
+          id: 33
+        },
+        data: {
+          email_verification_code: "687267",
+          ~~~~~~~~~~~~~~~~~~~~~~~
+          email_verification_code_expires_at: new Date("2026-08-06T17:26:27.630Z"),
+      ?   email?: String | StringFieldUpdateOperationsInput,
+      ?   password?: String | StringFieldUpdateOperationsInput,
+      ?   name?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   username?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   country_code?: String | StringFieldUpdateOperationsInput,
+      ?   bio?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   gender?: String | StringFieldUpdateOperationsInput,
+      ?   date_of_birth?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   latitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   longitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   looking_for?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   children_count?: Int | NullableIntFieldUpdateOperationsInput | Null,
+      ?   is_smoker?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   drinks_alcohol?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   education_level?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   work_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   relationship_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   language?: String | StringFieldUpdateOperationsInput,
+      ?   is_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_email_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_location_hidden?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_profile_complete?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_visible_on_map?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   hearts?: Int | IntFieldUpdateOperationsInput,
+      ?   super_likes?: Int | IntFieldUpdateOperationsInput,
+      ?   message_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   eye_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   rewind_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   next_eye_claim_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   heart_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   message_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   eye_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   rewind_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_ad_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   likes_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   streak_count?: Int | IntFieldUpdateOperationsInput,
+      ?   last_reward_claim_date?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   mystery_box_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   boost_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   chat_color?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   chat_color_changed_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   is_banned?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   ban_reason?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   ban_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   swipesSent?: SwipeUpdateManyWithoutSwiperNestedInput,
+      ?   swipesRecv?: SwipeUpdateManyWithoutTargetNestedInput,
+      ?   matchesAs1?: MatchUpdateManyWithoutUser1NestedInput,
+      ?   matchesAs2?: MatchUpdateManyWithoutUser2NestedInput,
+      ?   messages?: MessageUpdateManyWithoutSenderNestedInput,
+      ?   devices?: DeviceUpdateManyWithoutUserNestedInput,
+      ?   images?: ImageUpdateManyWithoutUserNestedInput,
+      ?   blockedBy?: BlockedUserUpdateManyWithoutUserNestedInput,
+      ?   blockedUsers?: BlockedUserUpdateManyWithoutBlockedUserNestedInput,
+      ?   reports?: ReportUpdateManyWithoutReporterNestedInput,
+      ?   reportedAs?: ReportUpdateManyWithoutReportedUserNestedInput,
+      ?   notifications?: NotificationUpdateManyWithoutUserNestedInput,
+      ?   profileViewsSent?: ProfileViewUpdateManyWithoutViewerNestedInput,
+      ?   profileViewsRecv?: ProfileViewUpdateManyWithoutViewedNestedInput,
+      ?   refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+        }
+      })
+
+Unknown argument `email_verification_code`. Available options are marked with ?.
+    at ar (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:10:1374)
+    at zr.handleRequestError (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7929)
+    at zr.handleAndLogRequestError (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at zr.request (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async a (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:75:6862)
+    at async D:\Development\project popin\backend\src\routes\auth.js:269:5 {
+  clientVersion: '7.8.0'
+}
+[auth/send-verification] 
+Invalid `prisma.user.update()` invocation in
+D:\Development\project popin\backend\src\routes\auth.js:269:23
+
+  266 }
+  267 
+  268 const code = generateVerificationCode();
+→ 269 await prisma.user.update({
+        where: {
+          id: 33
+        },
+        data: {
+          email_verification_code: "687267",
+          ~~~~~~~~~~~~~~~~~~~~~~~
+          email_verification_code_expires_at: new Date("2026-08-06T17:26:27.630Z"),
+      ?   email?: String | StringFieldUpdateOperationsInput,
+      ?   password?: String | StringFieldUpdateOperationsInput,
+      ?   name?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   username?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   country_code?: String | StringFieldUpdateOperationsInput,
+      ?   bio?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   gender?: String | StringFieldUpdateOperationsInput,
+      ?   date_of_birth?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   latitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   longitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   looking_for?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   children_count?: Int | NullableIntFieldUpdateOperationsInput | Null,
+      ?   is_smoker?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   drinks_alcohol?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   education_level?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   work_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   relationship_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   language?: String | StringFieldUpdateOperationsInput,
+      ?   is_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_email_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_location_hidden?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_profile_complete?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_visible_on_map?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   hearts?: Int | IntFieldUpdateOperationsInput,
+      ?   super_likes?: Int | IntFieldUpdateOperationsInput,
+      ?   message_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   eye_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   rewind_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   next_eye_claim_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   heart_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   message_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   eye_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   rewind_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_ad_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   likes_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   streak_count?: Int | IntFieldUpdateOperationsInput,
+      ?   last_reward_claim_date?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   mystery_box_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   boost_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   chat_color?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   chat_color_changed_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   is_banned?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   ban_reason?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   ban_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   swipesSent?: SwipeUpdateManyWithoutSwiperNestedInput,
+      ?   swipesRecv?: SwipeUpdateManyWithoutTargetNestedInput,
+      ?   matchesAs1?: MatchUpdateManyWithoutUser1NestedInput,
+      ?   matchesAs2?: MatchUpdateManyWithoutUser2NestedInput,
+      ?   messages?: MessageUpdateManyWithoutSenderNestedInput,
+      ?   devices?: DeviceUpdateManyWithoutUserNestedInput,
+      ?   images?: ImageUpdateManyWithoutUserNestedInput,
+      ?   blockedBy?: BlockedUserUpdateManyWithoutUserNestedInput,
+      ?   blockedUsers?: BlockedUserUpdateManyWithoutBlockedUserNestedInput,
+      ?   reports?: ReportUpdateManyWithoutReporterNestedInput,
+      ?   reportedAs?: ReportUpdateManyWithoutReportedUserNestedInput,
+      ?   notifications?: NotificationUpdateManyWithoutUserNestedInput,
+      ?   profileViewsSent?: ProfileViewUpdateManyWithoutViewerNestedInput,
+      ?   profileViewsRecv?: ProfileViewUpdateManyWithoutViewedNestedInput,
+      ?   refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+        }
+      })
+
+Unknown argument `email_verification_code`. Available options are marked with ?.
+[auth/send-verification] PrismaClientValidationError: 
+Invalid `prisma.user.update()` invocation in
+D:\Development\project popin\backend\src\routes\auth.js:269:23
+
+  266 }
+  267 
+  268 const code = generateVerificationCode();
+→ 269 await prisma.user.update({
+        where: {
+          id: 33
+        },
+        data: {
+          email_verification_code: "883782",
+          ~~~~~~~~~~~~~~~~~~~~~~~
+          email_verification_code_expires_at: new Date("2026-08-06T17:26:27.840Z"),
+      ?   email?: String | StringFieldUpdateOperationsInput,
+      ?   password?: String | StringFieldUpdateOperationsInput,
+      ?   name?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   username?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   country_code?: String | StringFieldUpdateOperationsInput,
+      ?   bio?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   gender?: String | StringFieldUpdateOperationsInput,
+      ?   date_of_birth?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   latitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   longitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   looking_for?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   children_count?: Int | NullableIntFieldUpdateOperationsInput | Null,
+      ?   is_smoker?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   drinks_alcohol?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   education_level?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   work_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   relationship_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   language?: String | StringFieldUpdateOperationsInput,
+      ?   is_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_email_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_location_hidden?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_profile_complete?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_visible_on_map?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   hearts?: Int | IntFieldUpdateOperationsInput,
+      ?   super_likes?: Int | IntFieldUpdateOperationsInput,
+      ?   message_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   eye_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   rewind_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   next_eye_claim_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   heart_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   message_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   eye_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   rewind_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_ad_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   likes_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   streak_count?: Int | IntFieldUpdateOperationsInput,
+      ?   last_reward_claim_date?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   mystery_box_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   boost_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   chat_color?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   chat_color_changed_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   is_banned?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   ban_reason?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   ban_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   swipesSent?: SwipeUpdateManyWithoutSwiperNestedInput,
+      ?   swipesRecv?: SwipeUpdateManyWithoutTargetNestedInput,
+      ?   matchesAs1?: MatchUpdateManyWithoutUser1NestedInput,
+      ?   matchesAs2?: MatchUpdateManyWithoutUser2NestedInput,
+      ?   messages?: MessageUpdateManyWithoutSenderNestedInput,
+      ?   devices?: DeviceUpdateManyWithoutUserNestedInput,
+      ?   images?: ImageUpdateManyWithoutUserNestedInput,
+      ?   blockedBy?: BlockedUserUpdateManyWithoutUserNestedInput,
+      ?   blockedUsers?: BlockedUserUpdateManyWithoutBlockedUserNestedInput,
+      ?   reports?: ReportUpdateManyWithoutReporterNestedInput,
+      ?   reportedAs?: ReportUpdateManyWithoutReportedUserNestedInput,
+      ?   notifications?: NotificationUpdateManyWithoutUserNestedInput,
+      ?   profileViewsSent?: ProfileViewUpdateManyWithoutViewerNestedInput,
+      ?   profileViewsRecv?: ProfileViewUpdateManyWithoutViewedNestedInput,
+      ?   refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+        }
+      })
+
+Unknown argument `email_verification_code`. Available options are marked with ?.
+    at ar (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:10:1374)
+    at zr.handleRequestError (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7929)
+    at zr.handleAndLogRequestError (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at zr.request (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async a (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:75:6862)
+    at async D:\Development\project popin\backend\src\routes\auth.js:269:5 {
+  clientVersion: '7.8.0'
+}
+[auth/send-verification] 
+Invalid `prisma.user.update()` invocation in
+D:\Development\project popin\backend\src\routes\auth.js:269:23
+
+  266 }
+  267 
+  268 const code = generateVerificationCode();
+→ 269 await prisma.user.update({
+        where: {
+          id: 33
+        },
+        data: {
+          email_verification_code: "883782",
+          ~~~~~~~~~~~~~~~~~~~~~~~
+          email_verification_code_expires_at: new Date("2026-08-06T17:26:27.840Z"),
+      ?   email?: String | StringFieldUpdateOperationsInput,
+      ?   password?: String | StringFieldUpdateOperationsInput,
+      ?   name?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   username?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   country_code?: String | StringFieldUpdateOperationsInput,
+      ?   bio?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   gender?: String | StringFieldUpdateOperationsInput,
+      ?   date_of_birth?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   latitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   longitude?: Float | NullableFloatFieldUpdateOperationsInput | Null,
+      ?   looking_for?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   children_count?: Int | NullableIntFieldUpdateOperationsInput | Null,
+      ?   is_smoker?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   drinks_alcohol?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   education_level?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   work_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   relationship_status?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   language?: String | StringFieldUpdateOperationsInput,
+      ?   is_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_email_verified?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_location_hidden?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_profile_complete?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   is_visible_on_map?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   hearts?: Int | IntFieldUpdateOperationsInput,
+      ?   super_likes?: Int | IntFieldUpdateOperationsInput,
+      ?   message_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   eye_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   rewind_credits?: Int | IntFieldUpdateOperationsInput,
+      ?   next_eye_claim_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   heart_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   message_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   eye_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   rewind_refill_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_ad_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   last_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   likes_seen_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   streak_count?: Int | IntFieldUpdateOperationsInput,
+      ?   last_reward_claim_date?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   mystery_box_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   boost_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   chat_color?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   chat_color_changed_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   is_banned?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   ban_reason?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   ban_expires_at?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   swipesSent?: SwipeUpdateManyWithoutSwiperNestedInput,
+      ?   swipesRecv?: SwipeUpdateManyWithoutTargetNestedInput,
+      ?   matchesAs1?: MatchUpdateManyWithoutUser1NestedInput,
+      ?   matchesAs2?: MatchUpdateManyWithoutUser2NestedInput,
+      ?   messages?: MessageUpdateManyWithoutSenderNestedInput,
+      ?   devices?: DeviceUpdateManyWithoutUserNestedInput,
+      ?   images?: ImageUpdateManyWithoutUserNestedInput,
+      ?   blockedBy?: BlockedUserUpdateManyWithoutUserNestedInput,
+      ?   blockedUsers?: BlockedUserUpdateManyWithoutBlockedUserNestedInput,
+      ?   reports?: ReportUpdateManyWithoutReporterNestedInput,
+      ?   reportedAs?: ReportUpdateManyWithoutReportedUserNestedInput,
+      ?   notifications?: NotificationUpdateManyWithoutUserNestedInput,
+      ?   profileViewsSent?: ProfileViewUpdateManyWithoutViewerNestedInput,
+      ?   profileViewsRecv?: ProfileViewUpdateManyWithoutViewedNestedInput,
+      ?   refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+        }
+      })
+
+Unknown argument `email_verification_code`. Available options are marked with ?.

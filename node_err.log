@@ -1,0 +1,69 @@
+[unhandledRejection] 409: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+PrismaClientKnownRequestError: 
+Invalid `prisma.user.findUnique()` invocation in
+D:\Development\project popin\backend\src\routes\profile.js:31:36
+
+  28 // GET /profile — get own full profile
+  29 router.get("/", authenticateToken, async (req, res) => {
+  30   try {
+→ 31     const user = await prisma.user.findUnique(
+
+    at zr.handleRequestError (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at zr.handleAndLogRequestError (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at zr.request (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async a (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:75:6862)
+    at async D:\Development\project popin\backend\src\routes\profile.js:31:18 {
+  code: 'ECONNREFUSED',
+  meta: { modelName: 'User' },
+  clientVersion: '7.8.0'
+}
+Location update error: DriverAdapterError: the database system is starting up
+    at PrismaPgAdapter.onError (D:\Development\project popin\backend\node_modules\@prisma\adapter-pg\dist\index.js:678:11)
+    at PrismaPgAdapter.performIO (D:\Development\project popin\backend\node_modules\@prisma\adapter-pg\dist\index.js:673:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PrismaPgAdapter.queryRaw (D:\Development\project popin\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+    at async e.interpretNode (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:11:44621)
+    at async e.interpretNode (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:11:45065)
+    at async e.interpretNode (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:11:43744)
+    at async e.interpretNode (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:11:46285)
+    at async e.run (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:11:43335)
+    at async e.execute (D:\Development\project popin\backend\node_modules\@prisma\client\runtime\client.js:57:815) {
+  cause: {
+    originalCode: '57P03',
+    originalMessage: 'the database system is starting up',
+    kind: 'postgres',
+    code: '57P03',
+    severity: 'FATAL',
+    message: 'the database system is starting up',
+    detail: undefined,
+    column: undefined,
+    hint: undefined
+  },
+  clientVersion: '7.8.0'
+}
+[2026-08-03T14:03:00.576Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 14:50:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T14:03:00.708Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 14:55:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T14:03:00.824Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:00:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.117Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:05:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.365Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:10:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.388Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:15:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.411Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:20:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.445Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:25:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.469Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:30:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.563Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:35:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.620Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:40:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.679Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:45:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.744Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:50:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.798Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 15:55:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.822Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:00:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.846Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:05:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.879Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:10:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:43.979Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:15:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:44.002Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:20:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:44.015Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:25:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:44.038Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:30:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:44.051Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:35:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:44.064Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:40:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:44.086Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:45:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-08-03T15:52:44.109Z] [PID: 6376] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Aug 03 2026 16:50:00 GMT+0100 (Irish Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.

@@ -1,0 +1,44 @@
+◇ injected env (8) from .env // tip: ⌘ suppress logs { quiet: true }
+[fcm] Firebase initialized
+[socket.io] initialized
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[telegram-bot] Bot started (telegraf · polling)
+[disappearing-cron] scheduled (every 5 minutes)
+[unban-cron] scheduled (every 5 minutes)
+Server running on port 3000 (0.0.0.0)
+[conversations] blocked link attempt from user 70 in conversation 27
+[conversations] blocked link attempt from user 70 in conversation 27
+[conversations] blocked link attempt from user 70 in conversation 27
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected
+[socket] User 72 disconnected
+[socket] User 72 connected

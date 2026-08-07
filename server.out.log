@@ -1,0 +1,12 @@
+◇ injected env (6) from .env // tip: ⌘ override existing { override: true }
+[fcm] Firebase initialized
+[socket.io] initialized
+◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+[telegram-bot] Bot started (telegraf · polling)
+[disappearing-cron] scheduled (every 5 minutes)
+[unban-cron] scheduled (every 5 minutes)
+Server running on port 3000 (0.0.0.0)
+[socket] User 28 connected
+[socket] User 28 disconnected
+[socket] User 30 connected
+[socket] User 30 disconnected

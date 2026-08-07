@@ -1,0 +1,42 @@
+# Render Blueprint — deploy the backend (Docker) with a managed PostgreSQL.
+# Apply it from the Render dashboard: New > Blueprint > select this repo.
+# The repo must be the backend root (Dockerfile lives at the repo root).
+
+databases:
+  - name: popin-postgres
+    plan: free
+    databaseName: popin
+    user: popin
+
+services:
+  - type: web
+    name: popin-api
+    runtime: docker
+    plan: free
+    autoDeploy: true
+    # Runs inside the built container before the service starts.
+    # Requires the Prisma CLI, which the Dockerfile keeps in the image.
+    preDeployCommand: npm run migrate:deploy
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: popin-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      # Frontend origin(s), comma-separated. Replace with your real app URL
+      # (e.g. https://popin.onrender.com or a custom domain).
+      - key: CORS_ORIGINS
+        value: https://popin-frontend.onrender.com
+      # Optional:
+      # - key: EMAIL_USER
+      #   value: your@email.com
+      # - key: TELEGRAM_BOT_TOKEN
+      #   sync: false
+      # - key: TELEGRAM_ADMIN_GROUP_ID
+      #   sync: false

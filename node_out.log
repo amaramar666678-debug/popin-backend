@@ -1,0 +1,286 @@
+◇ injected env (4) from .env // tip: ⌘ suppress logs { quiet: true }
+[fcm] Firebase initialized
+[socket.io] initialized
+◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[telegram-bot] Bot started (telegraf · polling)
+[disappearing-cron] scheduled (every 5 minutes)
+Server running on port 3000 (0.0.0.0)
+[socket] User 1 connected
+[socket] User 4 connected
+[socket] User 4 disconnected
+[socket] User 2 connected
+[socket] User 3 connected
+[socket] User 3 disconnected
+[socket] User 3 connected (hidden)
+[socket] User 3 disconnected
+[socket] User 2 disconnected
+[socket] User 4 connected
+[socket] User 2 connected
+[socket] User 3 connected
+[socket] User 3 disconnected
+[socket] User 3 connected (hidden)
+[socket] User 3 disconnected
+[socket] User 2 disconnected
+[socket] User 4 disconnected
+[socket] User 4 connected (hidden)
+[socket] Video call request from 1 to 4
+[socket]   recipient_id type: number, value: 4
+[socket]   online users: 1,4
+[socket]   recipient online? true
+[socket] Video call response for request 6: approved
+[socket] Video call start from 1 (type number)
+[socket]   found by request_id 6: approved
+[socket]   senderId=1 receiverId=4 userId=1 → recipientId=4
+[socket] Video call answer for request 6: answered
+[socket] Relay call.offer from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.answer from 4 to 1
+[socket] Video call start from 4 (type number)
+[socket]   found by request_id 6: approved
+[socket]   senderId=1 receiverId=4 userId=4 → recipientId=1
+[socket] Video call answer for request 6: answered
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.offer from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.answer from 1 to 4
+[socket] Relay call.end from 1 to 4
+[socket] Video call start from 1 (type number)
+[socket]   fallback by conversation 3: approved
+[socket]   senderId=1 receiverId=4 userId=1 → recipientId=4
+[socket] Video call answer for request 6: answered
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.offer from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Video call start from 1 (type number)
+[socket]   fallback by conversation 3: approved
+[socket]   ⌛ Request 6 expired — refreshed approval
+[socket]   senderId=1 receiverId=4 userId=1 → recipientId=4
+[socket] Ring timeout for request 6 — marked as missed
+[socket] Relay call.end from 1 to 4
+[socket] Video call start from 1 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 1
+[socket] Video call request from 4 to 1
+[socket]   recipient_id type: number, value: 1
+[socket]   online users: 1,4
+[socket]   recipient online? true
+[socket] Video call start from 1 (type number)
+[socket]   found by request_id 7: pending
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 1
+[socket] User 4 disconnected
+[socket] User 1 disconnected
+[socket] User 1 connected (hidden)
+[socket] User 4 connected
+[socket] Video call request from 1 to 4
+[socket]   recipient_id type: number, value: 4
+[socket]   online users: 1,4
+[socket]   recipient online? true
+[socket] Video call request from 4 to 1
+[socket]   recipient_id type: number, value: 1
+[socket]   online users: 1,4
+[socket]   recipient online? true
+[socket] Video call response for request 9: approved
+[socket] Video call start from 4 (type number)
+[socket]   found by request_id 8: expired
+[socket]   fallback by conversation 3: approved
+[socket]   senderId=4 receiverId=1 userId=4 → recipientId=1
+[socket] Video call end for request 8
+[socket] Ring timeout for request 9 — marked as missed
+[socket]   ✓ Request 8 marked as ended
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] User 4 disconnected
+[socket] User 1 disconnected
+[socket] User 1 connected
+[socket] User 4 connected
+[socket] Video call request from 1 to 4
+[socket]   recipient_id type: number, value: 4
+[socket]   online users: 1,4
+[socket]   recipient online? true
+[socket] Video call response for request 10: approved
+[socket] Video call start from 4 (type number)
+[socket]   found by request_id 10: approved
+[socket]   senderId=1 receiverId=4 userId=4 → recipientId=1
+[socket] Video call answer for request 10: answered
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.offer from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.answer from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.offer from 4 to 1
+[socket] Relay call.answer from 1 to 4
+[socket] Relay call.offer from 4 to 1
+[socket] Relay call.answer from 1 to 4
+[socket] Relay call.end from 1 to 4
+[socket] Video call start from 4 (type number)
+[socket]   found by request_id 10: approved
+[socket]   ⌛ Request 10 expired — refreshed approval
+[socket]   senderId=1 receiverId=4 userId=4 → recipientId=1
+[socket] Video call answer for request 10: answered
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.offer from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 4 to 1
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.ice from 1 to 4
+[socket] Relay call.answer from 1 to 4
+[socket] Relay call.offer from 4 to 1
+[socket] Relay call.answer from 1 to 4
+[socket] Relay call.end from 4 to 1
+[socket] Video call end for request 10
+[socket]   ✓ Request 10 marked as ended
+[socket] User 4 disconnected
+[socket] User 1 disconnected
+[socket] User 1 connected
+[socket] User 1 disconnected
+[socket] User 1 connected
+[socket] User 1 disconnected
+[socket] User 1 connected
+[socket] User 4 connected
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] Video call start from 1 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 1
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] User 1 disconnected
+[socket] User 4 disconnected
+[socket] User 1 connected
+[socket] User 4 connected
+[socket] Video call start from 1 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 1
+[socket] Video call start from 4 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 4
+[socket] User 4 disconnected
+[socket] User 1 disconnected
+[socket] User 1 connected
+[socket] User 1 disconnected
+[socket] User 1 connected
+[socket] Video call start from 1 (type number)
+[socket]   fallback by conversation 3: none
+[socket]   ❌ No approved request found for user 1
+[socket] User 1 disconnected
+[socket] User 1 connected
+[socket] User 1 disconnected
+[socket] User 4 connected
+[socket] User 4 disconnected
+[socket] User 4 connected
+[socket] User 4 disconnected
+[socket] User 4 connected
+[socket] User 4 disconnected
+[socket] User 4 connected
+[socket] User 4 disconnected
+[socket] User 4 connected
+[socket] User 4 disconnected
