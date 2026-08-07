@@ -1,3 +1,4 @@
+```yaml
 databases:
   - name: popin-postgres
     plan: free
@@ -27,12 +28,6 @@ services:
       - key: CORS_ORIGINS
         value: https://popin-frontend.onrender.com
 
-      # Optional:
-      # - key: EMAIL_USER
-      #   sync: false
-
-      # - key: TELEGRAM_BOT_TOKEN
-      #   sync: false
-
-      # - key: TELEGRAM_ADMIN_GROUP_ID
-      #   sync: false
+      - key: SERVICE_ACCOUNT_PATH
+        value: /etc/secrets/service-account.json
+```
