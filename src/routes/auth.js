@@ -18,38 +18,76 @@ const {
 const { safeHttpError } = require("../helpers/http_error");
 const { sendVerificationEmailGmail } = require("../services/gmailService");
 
-const VERIFICATION_CODE_TTL_MS = 10 * 60 * 1000; // 10 minutes
+const VERIFICATION_CODE_TTL_MS = 10 * 60 * 1000;
+
+// ─────────────────────────────────────────────────────────────
+// Verification code
+// ─────────────────────────────────────────────────────────────
 
 function generateVerificationCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-// ── Firebase Admin ──────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Firebase Admin
+//
+// Render Secret File:
+// /etc/secrets/service-account.json
+//
+// Local development fallback:
+// ../../service-account.json
+//
+// Optional environment variable:
+// SERVICE_ACCOUNT_PATH
+// ─────────────────────────────────────────────────────────────
+
 let firebaseAdmin = null;
 
 try {
   const admin = require("firebase-admin");
 
-  const saPath =
-    process.env.SERVICE_ACCOUNT_PATH ||
-    path.join(__dirname, "../../service-account.json");
+  const possiblePaths = [
+    process.env.SERVICE_ACCOUNT_PATH,
+    "/etc/secrets/service-account.json",
+    path.join(__dirname, "../../service-account.json"),
+  ].filter(Boolean);
 
-  if (fs.existsSync(saPath)) {
+  let saPath = null;
+
+  for (const candidate of possiblePaths) {
+    if (fs.existsSync(candidate)) {
+      saPath = candidate;
+      break;
+    }
+  }
+
+  if (saPath) {
     if (!admin.apps.length) {
-      const sa = JSON.parse(fs.readFileSync(saPath, "utf8"));
+      const serviceAccount = JSON.parse(
+        fs.readFileSync(saPath, "utf8")
+      );
 
       admin.initializeApp({
-        credential: admin.credential.cert(sa),
+        credential: admin.credential.cert(serviceAccount),
       });
     }
 
     firebaseAdmin = admin;
 
-    console.log("[auth] Firebase Admin initialized");
+    console.log(
+      `[auth] Firebase Admin initialized using ${saPath}`
+    );
   } else {
     console.warn(
-      `[auth] Firebase service account not found at ${saPath}`
+      "[auth] Firebase service account not found."
     );
+
+    // Do not use fake Google authentication in production.
+    if (process.env.NODE_ENV === "production") {
+      console.error(
+        "[auth] Google authentication will be unavailable until the Firebase service account is configured."
+      );
+    }
   }
 } catch (err) {
   console.error(
@@ -58,7 +96,10 @@ try {
   );
 }
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/login
+// ─────────────────────────────────────────────────────────────
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -111,7 +152,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/register
+// ─────────────────────────────────────────────────────────────
+
 router.post("/register", async (req, res) => {
   try {
     const {
@@ -238,7 +282,10 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/google
+// ─────────────────────────────────────────────────────────────
+
 router.post("/google", async (req, res) => {
   try {
     const { id_token } = req.body;
@@ -249,40 +296,40 @@ router.post("/google", async (req, res) => {
       });
     }
 
+    // Firebase Admin is required in production.
+    if (!firebaseAdmin) {
+      console.error(
+        "[auth/google] Firebase Admin is not initialized"
+      );
+
+      return res.status(503).json({
+        error:
+          "Google authentication is temporarily unavailable",
+      });
+    }
+
     let googleEmail = null;
     let googleName = null;
     let googlePicture = null;
-    let googleSub = null;
 
-    // Verify Google ID token via Firebase Admin
-    if (firebaseAdmin) {
-      try {
-        const decoded =
-          await firebaseAdmin
-            .auth()
-            .verifyIdToken(id_token);
+    try {
+      const decoded =
+        await firebaseAdmin
+          .auth()
+          .verifyIdToken(id_token);
 
-        googleEmail = decoded.email || null;
-        googleName = decoded.name || null;
-        googlePicture = decoded.picture || null;
-        googleSub = decoded.sub || null;
-      } catch (verifyErr) {
-        console.error(
-          "[auth/google] Token verification failed:",
-          verifyErr.message
-        );
-
-        return res.status(401).json({
-          error: "Invalid Google token",
-        });
-      }
-    } else {
-      console.warn(
-        "[auth/google] Firebase Admin not initialized — dev mode"
+      googleEmail = decoded.email || null;
+      googleName = decoded.name || null;
+      googlePicture = decoded.picture || null;
+    } catch (verifyErr) {
+      console.error(
+        "[auth/google] Token verification failed:",
+        verifyErr.message
       );
 
-      googleEmail = `google_dev_${Date.now()}@example.com`;
-      googleName = "Google User";
+      return res.status(401).json({
+        error: "Invalid Google token",
+      });
     }
 
     if (!googleEmail) {
@@ -292,7 +339,7 @@ router.post("/google", async (req, res) => {
       });
     }
 
-    // Find existing user or create new user
+    // Find existing user or create a new user
     let user = await prisma.user.findUnique({
       where: { email: googleEmail },
     });
@@ -346,7 +393,10 @@ router.post("/google", async (req, res) => {
   }
 });
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/refresh
+// ─────────────────────────────────────────────────────────────
+
 router.post("/refresh", async (req, res) => {
   try {
     const { refresh_token } = req.body;
@@ -388,7 +438,10 @@ router.post("/refresh", async (req, res) => {
   }
 });
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/logout
+// ─────────────────────────────────────────────────────────────
+
 router.post("/logout", async (req, res) => {
   try {
     const { refresh_token } = req.body;
@@ -412,7 +465,10 @@ router.post("/logout", async (req, res) => {
   }
 });
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/logout-all
+// ─────────────────────────────────────────────────────────────
+
 router.post(
   "/logout-all",
   authenticateToken,
@@ -442,7 +498,10 @@ router.post(
   }
 );
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/send-verification
+// ─────────────────────────────────────────────────────────────
+
 router.post(
   "/send-verification",
   authenticateToken,
@@ -505,7 +564,10 @@ router.post(
   }
 );
 
+// ─────────────────────────────────────────────────────────────
 // POST /auth/verify-email
+// ─────────────────────────────────────────────────────────────
+
 router.post(
   "/verify-email",
   authenticateToken,
