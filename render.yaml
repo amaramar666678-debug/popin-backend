@@ -1,33 +1,23 @@
-```yaml
-databases:
-  - name: popin-postgres
-    plan: free
-    databaseName: popin
-    user: popin
+# استخدام صورة Node الرسمية
+FROM node:18-alpine
 
-services:
-  - type: web
-    name: popin-api
-    runtime: docker
-    plan: free
-    autoDeploy: true
-    healthCheckPath: /health
+# تحديد مجلد العمل داخل الحاوية
+WORKDIR /app
 
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: popin-postgres
-          property: connectionString
+# نسخ ملفات حزم العقد (package.json و package-lock.json) أولاً لتحسين الكاش
+COPY package*.json ./
 
-      - key: JWT_SECRET
-        generateValue: true
+# تثبيت الحزم
+RUN npm install
 
-      - key: NODE_ENV
-        value: production
+# نسخ باقي ملفات المشروع (بما في ذلك مجلد prisma والمجلدات البرمجية)
+COPY . .
 
-      - key: CORS_ORIGINS
-        value: https://popin-frontend.onrender.com
+# توليد Prisma Client
+RUN npx prisma generate
 
-      - key: SERVICE_ACCOUNT_PATH
-        value: /etc/secrets/service-account.json
-```
+# تعريض المنفذ الذي يعمل عليه التطبيق
+EXPOSE 3000
+
+# أمر التشغيل: تنفيذ الترحيل (Migrations) أولاً لإنشاء الجداول، ثم تشغيل السيرفر
+CMD ["sh", -c", "npx prisma migrate deploy && npm start"]
