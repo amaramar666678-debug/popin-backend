@@ -139,6 +139,31 @@ router.post("/login", async (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────
+// POST /auth/check-email
+// Used by the app for real-time email availability while typing.
+// ─────────────────────────────────────────────────────────────
+
+router.post("/check-email", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email || typeof email !== "string") {
+      return res.status(400).json({ error: "email is required" });
+    }
+
+    const existing = await prisma.user.findUnique({
+      where: { email: email.trim() },
+      select: { id: true },
+    });
+
+    return res.json({ available: !existing });
+  } catch (err) {
+    console.error("[auth/check-email]", err.message);
+    return res.status(500).json({ error: "server error" });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────
 // POST /auth/register
 // ─────────────────────────────────────────────────────────────
 
