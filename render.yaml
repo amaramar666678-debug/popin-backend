@@ -1,23 +1,28 @@
-# استخدام صورة Node الرسمية
-FROM node:18-alpine
+# Render Blueprint - Popin backend
+# الاستخدام: Render > New + > Blueprint > لصق رابط هذا الريبو
+# سينشئ: قاعدة بيانات Postgres + خدمة الويب (Docker)
 
-# تحديد مجلد العمل داخل الحاوية
-WORKDIR /app
+databases:
+  - name: popin-postgres
+    plan: free
+    databaseName: popin
+    user: popin
 
-# نسخ ملفات حزم العقد (package.json و package-lock.json) أولاً لتحسين الكاش
-COPY package*.json ./
-
-# تثبيت الحزم
-RUN npm install
-
-# نسخ باقي ملفات المشروع (بما في ذلك مجلد prisma والمجلدات البرمجية)
-COPY . .
-
-# توليد Prisma Client
-RUN npx prisma generate
-
-# تعريض المنفذ الذي يعمل عليه التطبيق
-EXPOSE 3000
-
-# أمر التشغيل: تنفيذ الترحيل (Migrations) أولاً لإنشاء الجداول، ثم تشغيل السيرفر
-CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]
+services:
+  - type: web
+    name: popin-api
+    runtime: docker
+    repo: https://github.com/amaramar666678-debug/popin-backend.git
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: popin-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://popin-frontend.onrender.com
+      - key: NODE_ENV
+        value: production
