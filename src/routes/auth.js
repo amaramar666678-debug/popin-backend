@@ -24,7 +24,7 @@ function generateVerificationCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-// ── Firebase Admin (shared init with fcm.js) ──
+// ── Firebase Admin ──────────────────────────────────────────────
 let firebaseAdmin = null;
 
 try {
@@ -39,11 +39,13 @@ try {
       const sa = JSON.parse(fs.readFileSync(saPath, "utf8"));
 
       admin.initializeApp({
-        credential: admin.cert(sa),
+        credential: admin.credential.cert(sa),
       });
     }
 
     firebaseAdmin = admin;
+
+    console.log("[auth] Firebase Admin initialized");
   } else {
     console.warn(
       `[auth] Firebase service account not found at ${saPath}`
@@ -62,25 +64,30 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({ error: "email and password are required" });
+      return res.status(400).json({
+        error: "email and password are required",
+      });
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
     if (!user) {
-      return res
-        .status(401)
-        .json({ error: "invalid email or password" });
+      return res.status(401).json({
+        error: "invalid email or password",
+      });
     }
 
-    const validPassword = await bcrypt.compare(password, user.password);
+    const validPassword = await bcrypt.compare(
+      password,
+      user.password
+    );
 
     if (!validPassword) {
-      return res
-        .status(401)
-        .json({ error: "invalid email or password" });
+      return res.status(401).json({
+        error: "invalid email or password",
+      });
     }
 
     const tokens = await issueTokens(user, {
@@ -98,7 +105,8 @@ router.post("/login", async (req, res) => {
     console.error("[auth/login]", error);
 
     res.status(500).json({
-      error: "An unexpected error occurred. Please try again.",
+      error:
+        "An unexpected error occurred. Please try again.",
     });
   }
 });
@@ -117,9 +125,9 @@ router.post("/register", async (req, res) => {
     } = req.body;
 
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({ error: "email and password are required" });
+      return res.status(400).json({
+        error: "email and password are required",
+      });
     }
 
     const existing = await prisma.user.findUnique({
@@ -127,16 +135,17 @@ router.post("/register", async (req, res) => {
     });
 
     if (existing) {
-      return res
-        .status(409)
-        .json({ error: "email already registered" });
+      return res.status(409).json({
+        error: "email already registered",
+      });
     }
 
-    // Check username uniqueness (not full_name)
+    // Check username uniqueness
     if (username) {
-      const existingUsername = await prisma.user.findUnique({
-        where: { username },
-      });
+      const existingUsername =
+        await prisma.user.findUnique({
+          where: { username },
+        });
 
       if (existingUsername) {
         const clean = username
@@ -144,8 +153,12 @@ router.post("/register", async (req, res) => {
           .toLowerCase();
 
         const suggestions = [
-          `${clean}${Math.floor(100 + Math.random() * 900)}`,
-          `${clean}_${Math.floor(1 + Math.random() * 99)}`,
+          `${clean}${Math.floor(
+            100 + Math.random() * 900
+          )}`,
+          `${clean}_${Math.floor(
+            1 + Math.random() * 99
+          )}`,
           `the_${clean}`,
         ];
 
@@ -156,14 +169,22 @@ router.post("/register", async (req, res) => {
       }
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      10
+    );
 
     const centroid = countryCentroid(country_code);
 
-    const { fuzzLocation } = require("../helpers/location_privacy");
+    const { fuzzLocation } = require(
+      "../helpers/location_privacy"
+    );
 
     const seedLocation = centroid
-      ? fuzzLocation(centroid.latitude, centroid.longitude)
+      ? fuzzLocation(
+          centroid.latitude,
+          centroid.longitude
+        )
       : null;
 
     const createData = {
@@ -211,7 +232,8 @@ router.post("/register", async (req, res) => {
     console.error("[auth/register]", error);
 
     res.status(500).json({
-      error: "An unexpected error occurred. Please try again.",
+      error:
+        "An unexpected error occurred. Please try again.",
     });
   }
 });
@@ -222,21 +244,23 @@ router.post("/google", async (req, res) => {
     const { id_token } = req.body;
 
     if (!id_token) {
-      return res
-        .status(400)
-        .json({ error: "id_token is required" });
+      return res.status(400).json({
+        error: "id_token is required",
+      });
     }
 
-    // Verify the Google ID token via Firebase Admin
     let googleEmail = null;
     let googleName = null;
     let googlePicture = null;
     let googleSub = null;
 
+    // Verify Google ID token via Firebase Admin
     if (firebaseAdmin) {
       try {
         const decoded =
-          await firebaseAdmin.auth().verifyIdToken(id_token);
+          await firebaseAdmin
+            .auth()
+            .verifyIdToken(id_token);
 
         googleEmail = decoded.email || null;
         googleName = decoded.name || null;
@@ -248,12 +272,11 @@ router.post("/google", async (req, res) => {
           verifyErr.message
         );
 
-        return res
-          .status(401)
-          .json({ error: "Invalid Google token" });
+        return res.status(401).json({
+          error: "Invalid Google token",
+        });
       }
     } else {
-      // Fallback: no Firebase Admin — accept token as-is (dev mode only)
       console.warn(
         "[auth/google] Firebase Admin not initialized — dev mode"
       );
@@ -264,11 +287,12 @@ router.post("/google", async (req, res) => {
 
     if (!googleEmail) {
       return res.status(401).json({
-        error: "Could not extract email from Google token",
+        error:
+          "Could not extract email from Google token",
       });
     }
 
-    // Find existing user by email or create new one
+    // Find existing user or create new user
     let user = await prisma.user.findUnique({
       where: { email: googleEmail },
     });
@@ -277,7 +301,9 @@ router.post("/google", async (req, res) => {
       const createData = {
         email: googleEmail,
         password: "",
-        name: googleName || googleEmail.split("@")[0],
+        name:
+          googleName ||
+          googleEmail.split("@")[0],
         is_email_verified: true,
       };
 
@@ -286,8 +312,12 @@ router.post("/google", async (req, res) => {
       });
     }
 
-    // If user exists but has no profile picture, update from Google
-    if (user && googlePicture && !user.profile_picture_url) {
+    // Update profile picture from Google
+    if (
+      user &&
+      googlePicture &&
+      !user.profile_picture_url
+    ) {
       try {
         user = await prisma.user.update({
           where: { id: user.id },
@@ -317,24 +347,27 @@ router.post("/google", async (req, res) => {
 });
 
 // POST /auth/refresh
-// rotation: old refresh token is revoked on every use
 router.post("/refresh", async (req, res) => {
   try {
     const { refresh_token } = req.body;
 
     if (!refresh_token) {
-      return res
-        .status(400)
-        .json({ error: "refresh_token is required" });
+      return res.status(400).json({
+        error: "refresh_token is required",
+      });
     }
 
     const {
       access_token,
       refresh_token: newRefresh,
       refresh_expires_at,
-    } = await rotateRefreshToken(refresh_token, {
-      userAgent: req.headers["user-agent"],
-    });
+    } = await rotateRefreshToken(
+      refresh_token,
+      {
+        userAgent:
+          req.headers["user-agent"],
+      }
+    );
 
     res.json({
       access_token,
@@ -356,7 +389,6 @@ router.post("/refresh", async (req, res) => {
 });
 
 // POST /auth/logout
-// revoke the presented refresh token
 router.post("/logout", async (req, res) => {
   try {
     const { refresh_token } = req.body;
@@ -372,12 +404,15 @@ router.post("/logout", async (req, res) => {
   } catch (error) {
     console.error("[auth/logout]", error);
 
-    safeHttpError(res, error, "auth/logout");
+    safeHttpError(
+      res,
+      error,
+      "auth/logout"
+    );
   }
 });
 
 // POST /auth/logout-all
-// revoke every refresh session for the authenticated user
 router.post(
   "/logout-all",
   authenticateToken,
@@ -393,9 +428,16 @@ router.post(
         ok: true,
       });
     } catch (error) {
-      console.error("[auth/logout-all]", error);
+      console.error(
+        "[auth/logout-all]",
+        error
+      );
 
-      safeHttpError(res, error, "auth/logout-all");
+      safeHttpError(
+        res,
+        error,
+        "auth/logout-all"
+      );
     }
   }
 );
@@ -406,14 +448,15 @@ router.post(
   authenticateToken,
   async (req, res) => {
     try {
-      const user = await prisma.user.findUnique({
-        where: { id: req.user.id },
-      });
+      const user =
+        await prisma.user.findUnique({
+          where: { id: req.user.id },
+        });
 
       if (!user) {
-        return res
-          .status(404)
-          .json({ error: "User not found" });
+        return res.status(404).json({
+          error: "User not found",
+        });
       }
 
       if (user.is_email_verified) {
@@ -422,22 +465,29 @@ router.post(
         });
       }
 
-      const code = generateVerificationCode();
+      const code =
+        generateVerificationCode();
 
       await prisma.user.update({
         where: { id: user.id },
         data: {
           email_verification_code: code,
-          email_verification_code_expires_at: new Date(
-            Date.now() + VERIFICATION_CODE_TTL_MS
-          ),
+          email_verification_code_expires_at:
+            new Date(
+              Date.now() +
+                VERIFICATION_CODE_TTL_MS
+            ),
         },
       });
 
-      await sendVerificationEmailGmail(user.email, code);
+      await sendVerificationEmailGmail(
+        user.email,
+        code
+      );
 
       res.json({
-        message: "Verification email sent",
+        message:
+          "Verification email sent",
         ok: true,
       });
     } catch (error) {
@@ -465,23 +515,26 @@ router.post(
 
       if (!code) {
         return res.status(400).json({
-          error: "Verification code is required",
+          error:
+            "Verification code is required",
         });
       }
 
-      const user = await prisma.user.findUnique({
-        where: { id: req.user.id },
-      });
+      const user =
+        await prisma.user.findUnique({
+          where: { id: req.user.id },
+        });
 
       if (!user) {
-        return res
-          .status(404)
-          .json({ error: "User not found" });
+        return res.status(404).json({
+          error: "User not found",
+        });
       }
 
       if (user.is_email_verified) {
         return res.json({
-          message: "Email already verified",
+          message:
+            "Email already verified",
           ok: true,
         });
       }
@@ -489,8 +542,9 @@ router.post(
       if (
         !user.email_verification_code ||
         !user.email_verification_code_expires_at ||
-        user.email_verification_code_expires_at.getTime() <
-          Date.now()
+        user
+          .email_verification_code_expires_at
+          .getTime() < Date.now()
       ) {
         return res.status(400).json({
           error:
@@ -498,9 +552,13 @@ router.post(
         });
       }
 
-      if (user.email_verification_code !== code) {
+      if (
+        user.email_verification_code !==
+        code
+      ) {
         return res.status(400).json({
-          error: "Invalid verification code",
+          error:
+            "Invalid verification code",
         });
       }
 
@@ -508,13 +566,16 @@ router.post(
         where: { id: user.id },
         data: {
           is_email_verified: true,
-          email_verification_code: null,
-          email_verification_code_expires_at: null,
+          email_verification_code:
+            null,
+          email_verification_code_expires_at:
+            null,
         },
       });
 
       res.json({
-        message: "Email verified successfully",
+        message:
+          "Email verified successfully",
         ok: true,
       });
     } catch (error) {
