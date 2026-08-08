@@ -1,39 +1,27 @@
-# syntax=docker/dockerfile:1
 
-FROM node:22-alpine AS build
-
+# استخدام صورة Node الرسمية
+FROM node:18-alpine
+ 
+# تحديد مجلد العمل داخل الحاوية
 WORKDIR /app
-
-RUN apk add --no-cache python3 make g++
-
-COPY package.json package-lock.json* ./
-RUN npm ci
-
-COPY prisma ./prisma
-COPY prisma.config.ts ./
-
+ 
+# نسخ ملفات حزم العقد (package.json و package-lock.json) أولاً لتحسين الكاش
+COPY package*.json ./
+ 
+# تثبيت الحزم
+RUN npm install
+ 
+# نسخ باقي ملفات المشروع (بما في ذلك مجلد prisma والمجلدات البرمجية)
+COPY . .
+ 
+# توليد Prisma Client
 RUN npx prisma generate
-
-
-FROM node:22-alpine
-
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-COPY --from=build /app/node_modules ./node_modules
-
-COPY package.json ./
-COPY prisma ./prisma
-COPY src ./src
-
-RUN mkdir -p uploads && chown -R node:node /app
-
-USER node
-
+ 
+# التأكد من صلاحيات التنفيذ لملف entrypoint.sh (يحمي من مشاكل Line endings عند اللصق من Windows)
+RUN sed -i 's/\r$//' entrypoint.sh && chmod +x entrypoint.sh
+ 
+# تعريض المنفذ الذي يعمل عليه التطبيق
 EXPOSE 3000
-
-HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:${PORT:-3000}/health || exit 1
-
-CMD ["node", "src/server.js"]
+ 
+# تنفيذ الترحيل (Migrations) أولاً لإنشاء الجداول، ثم تشغيل السيرفر
+ENTRYPOINT ["./entrypoint.sh"]
